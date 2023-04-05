@@ -1,0 +1,66 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+
+        {
+            "type": "java",
+            "name": "Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "Adder",
+            "request": "launch",
+            "mainClass": "Adder",
+            "projectName": "java_workshop_93fae5e7"
+        },
+        {
+            "type": "java",
+            "name": "AssertTest",
+            "request": "launch",
+            "mainClass": "AssertTest",
+            "projectName": "java_workshop_93fae5e7",
+            "vmArgs": "-enableassertions"
+        },
+        {
+            "type": "java",
+            "name": "EWalletMain",
+            "request": "launch",
+            "mainClass": "EWalletMain",
+            "projectName": "java_workshop_93fae5e7"
+        },
+        {
+            "type": "java",
+            "name": "Phone",
+            "request": "launch",
+            "mainClass": "Phone",
+            "projectName": "java_workshop_93fae5e7"
+        },
+        {
+            "type": "java",
+            "name": "Q16B",
+            "request": "launch",
+            "mainClass": "Q16B",
+            "projectName": "java_workshop_93fae5e7"
+        },
+        {
+            "type": "java",
+            "name": "TaxCalculator",
+            "request": "launch",
+            "mainClass": "TaxCalculator",
+            "projectName": "java_workshop_93fae5e7"
+        },
+        {
+            "type": "java",
+            "name": "Test",
+            "request": "launch",
+            "mainClass": "Test",
+            "projectName": "java_workshop_93fae5e7",
+            "vmArgs": "-enableassertions"
+        }
+    ]
+}
