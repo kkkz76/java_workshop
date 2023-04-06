@@ -60,11 +60,11 @@ public class Test {
 
 		// function 4
 		try {
-			int n = 8;
+			int n = 4;
 			boolean isPrime = Lab1.isPrime(n);
 			assert isPrime == false;
 
-			n = 7;
+			n = 2;
 			isPrime = Lab1.isPrime(n);
 			assert isPrime == true;
 

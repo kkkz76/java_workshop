@@ -52,13 +52,19 @@ public class Lab1 {
 		boolean isPrime = false; // do not change
 
 		// you code here
-		
-		int x = n%2;
-		if((x != 0 && n>1) || n==2 ){
-			isPrime = true;
-		}
-
-		// end
+			int count = 0;
+			for (int j = 2; j <= n / 2; j++) {
+			 if (n % j == 0) {
+			  count++;
+			  break;
+			 }
+			}
+		 
+			if (count == 0) {
+			 isPrime = true;
+			}
+		 
+		   // end
 
 		return isPrime; // do not change
 	}
