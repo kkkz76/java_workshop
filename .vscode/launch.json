@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "TemperatureTest",
+            "request": "launch",
+            "mainClass": "Lab2.TemperatureTest",
+            "projectName": "java_workshop_93fae5e7"
+        },
+        {
+            "type": "java",
             "name": "Current File",
             "request": "launch",
             "mainClass": "${file}"
