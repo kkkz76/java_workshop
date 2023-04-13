@@ -8,8 +8,10 @@ public class AssertTest {
       
         System.out.println("There are "+ weekend.length+" weekend days in a week");
 
-        char scale = 'a';
-            if(scale == 'a'){
+        String scale ="Apple";
+        String apple = "Apple";
+
+            if(scale == apple){
                 System.out.println("right");
             }else{
                 System.out.println("wrong");
