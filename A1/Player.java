@@ -75,7 +75,7 @@ public class Player extends User {
                 checkMainBalance(player);
             }else if(y == false){
                 System.out.println("You Lose");
-                
+                System.exit(0);
             }
         }else{
             checkMainBalance(player);
