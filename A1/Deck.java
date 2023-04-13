@@ -77,6 +77,9 @@ public class Deck {
 
         return Arrays.asList(suits).indexOf(suit);
     }
+    public ArrayList<Card> getCards(){
+        return this.cards;
+    }
 
     public static void main(String[] args) {
         Deck d1 = new Deck();

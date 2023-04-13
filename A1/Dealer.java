@@ -6,11 +6,11 @@ public class Dealer extends Player {
     private Deck deck;
 
     public Dealer() {
-        super("Dealer", "", 100);
+        super("Dealer", "", 100,10);
         deck = new Deck();
     }
     public void DealerShuffle(){
-        System.out.println("Dealer shuffling cards......");
+        System.out.println("Game Starts - Dealer Shuffles deck.");
         deck.shuffleCard();
     }
     public void dealCardTo(Player player){
@@ -20,12 +20,16 @@ public class Dealer extends Player {
     public String finalResult(Player player, Dealer dealer){
         
         if(player.getTotalCardsValue() > dealer.getTotalCardsValue()){
-           return "player";
+           return player.getUsername()+" Win";
         }else if(player.getTotalCardsValue() < dealer.getTotalCardsValue()){
-           return "dealer";
+           return player.getUsername()+" Lose , Dealer wins the game";
         }else{
-            return "tie";
+            return "The game is tie!!!";
         }   
+    }
+
+    public Deck getDeck(){
+        return this.deck;
     }
 
     public String singleResult(Player player, Dealer dealer){
@@ -57,24 +61,26 @@ public class Dealer extends Player {
         }
     }
 
+    
+
     public static void main(String[] args) {
-        Player p1 = new Player("MGMG","123",100);
+        Player p1 = new Player("MGMG","123",100,0);
         Dealer d1 = new Dealer();
         d1.DealerShuffle();
         d1.dealCardTo(p1);
         d1.dealCardTo(d1);
-        p1.showCardOnHand();
-        d1.showCardOnHand();
+        p1.showCardOnHand(true);
+        d1.showCardOnHand(false);
         System.out.println("The Winner is :"+ d1.singleResult(p1, d1));
         d1.dealCardTo(p1);
         d1.dealCardTo(d1);
-        p1.showCardOnHand();
-        d1.showCardOnHand();
+        p1.showCardOnHand(true);
+        d1.showCardOnHand(true);
         System.out.println("The Winner is :"+d1.singleResult(p1, d1));
         d1.dealCardTo(p1);
         d1.dealCardTo(d1);
-        p1.showCardOnHand();
-        d1.showCardOnHand();
+        p1.showCardOnHand(true);
+        d1.showCardOnHand(true);
         System.out.println("The Winner is :"+d1.singleResult(p1, d1));
         System.out.println("The final winner is:" + d1.finalResult(p1, d1));
     }

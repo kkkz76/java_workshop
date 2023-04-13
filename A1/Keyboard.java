@@ -84,7 +84,7 @@ public class Keyboard {
         while (!valid) {
             String input = readString(prompt);
             if (input.equalsIgnoreCase("yes") || input.equalsIgnoreCase("y") || input.equalsIgnoreCase("true")
-                    || input.equalsIgnoreCase("t")) {
+                    || input.equalsIgnoreCase("t") ) {
                 return true;
             } else if (input.equalsIgnoreCase("no") || input.equalsIgnoreCase("n") || input.equalsIgnoreCase("false")
                     || input.equalsIgnoreCase("f")) {
@@ -95,6 +95,24 @@ public class Keyboard {
         }
         return false;
     }
+
+
+    public static boolean readCallQuit(String prompt) {
+        boolean valid = false;
+        while (!valid) {
+            String input = readString(prompt);
+            if (input.equalsIgnoreCase("call") || input.equalsIgnoreCase("C")){
+                return true;
+            } else if (input.equalsIgnoreCase("quit") || input.equalsIgnoreCase("q")) {
+                return false;
+            } else {
+                System.out.println("*** Please enter C/Q or Call/Quit ***");
+            }
+        }
+        return false;
+    }
+
+
 
     public static java.util.Date readDate(String prompt) {
         java.util.Date date = null;

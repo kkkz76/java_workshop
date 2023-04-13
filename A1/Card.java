@@ -25,7 +25,7 @@ public class Card {
         }
         
         public String toString(){
-            return "<"+suite+" "+name+">"+" "+"value="+value;
+            return "<"+suite+" "+name+">  ";
         }
            
         
