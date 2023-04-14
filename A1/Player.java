@@ -14,6 +14,8 @@ public class Player extends User {
         this.betAmount = betAmount;
         this.cardOnHand = new ArrayList<Card>();
     }
+
+
     public int getChips(){
         return this.chips;
     }
@@ -61,50 +63,54 @@ public class Player extends User {
     }
 
 
-    public void bet(String person ,Player player, Dealer dealer){
+    public boolean bet(String person ,Player player, Dealer dealer){
       
         if(person.equals("dealer")){
            System.out.println();
-           System.out.println("Dealer Calls 10 Chips");
+           System.out.println("\nDealer Calls 10 Chips");
            dealer.loseChips(dealer.getBetAmount());
-           boolean y = Keyboard.readBoolean("Do you want to Follow [Y/N]");
+           boolean y = Keyboard.readBoolean("\nDo you want to Follow [Y/N]");
            if(y == true){
                 dealer.setBetAmount(10);
                 player.setBetAmount(dealer.getBetAmount());
                 player.loseChips(dealer.getBetAmount());
                 checkMainBalance(player);
-            }else if(y == false){
-                System.out.println("You Lose");
-                System.exit(0);
+                totalAmount += player.getBetAmount()+dealer.getBetAmount();
+                return true;
+            }else{
+                System.out.println("\nYou Lose");
+                return false;
             }
         }else{
             checkMainBalance(player);
             
-            boolean CallQuit = Keyboard.readCallQuit("Do you want to [C]all or [Q]uit? :");
+            boolean CallQuit = Keyboard.readCallQuit("\nDo you want to [C]all or [Q]uit? :");
 
             if(CallQuit == true){
-                int z = Keyboard.readInt("Player Call, state bet :");
+                int z = Keyboard.readInt("\nPlayer Call, state bet :");
                 int x = checkBetBalance(z, player);
                 player.setBetAmount(x);
                 player.loseChips(x);
                 dealer.setBetAmount(player.getBetAmount());
                 dealer.loseChips(player.getBetAmount());
+                System.out.println("\nDealer follows the bet");
+                totalAmount += player.getBetAmount()+dealer.getBetAmount();
+                return true;
 
             }else{
-                System.out.println("You Quit the current game");
-                System.exit(0); 
+                System.out.println("\nYou Quit the current game");
+                return false;
             }
             
             
         }
 
-        totalAmount += player.getBetAmount()+dealer.getBetAmount();
     }
 
     public void checkMainBalance(Player player) {
             if(player.getChips() <= 0 ){
-                System.out.println("Your main balance is zero!");
-                System.out.println("You lose the game!");
+                System.out.println("\nYour main balance is zero!");
+                System.out.println("\nYou lose the game!");
                 System.exit(0);
             }
     }
@@ -120,8 +126,8 @@ public class Player extends User {
                         throw new IllegalArgumentException();
                     }
                 } catch (IllegalArgumentException e) {
-                    System.out.println("Your bet is invalid");
-                    balance = Keyboard.readInt("Player Call, state bet :");
+                    System.out.println("\nYour bet is invalid");
+                    balance = Keyboard.readInt("\nPlayer Call, state bet :");
             }
         }
         return balance;

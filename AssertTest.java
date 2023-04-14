@@ -1,6 +1,23 @@
+
 public class AssertTest {
 
    
+    public static void test(){
+        Boolean x = true;
+        while(x){
+            System.out.println("hello1");
+            System.out.println("hello2");
+            System.out.println("hello3");
+            System.out.println("hello4");
+            x= true;
+            if(x == false){
+             break;
+            }
+            System.out.println("hello5");
+            System.out.println("hello6");
+        }
+        System.out.println("HEllooooooo");
+    }
     
     public static void main(String[] args) {
         String[] weekend = {"Friday", "Saturday", "Sunday"};
@@ -16,6 +33,9 @@ public class AssertTest {
             }else{
                 System.out.println("wrong");
             }
+        
+            test();
+        
 
       
 }

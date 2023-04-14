@@ -15,30 +15,37 @@ public class Deck {
         String suit = suits[i];
         String name;
         int value;
-            for (int j = 1; j <=12 ; j++){
+        int realValue;
+            for (int j = 1; j <=13 ; j++){
                 switch (j){
                     case 1:
                         name = "Ace";
                         value = 1;
+                        realValue =1;
                         break;
-                    case 10:
+                    case 11:
                         name = "Jack";
                         value = 10;
+                        realValue = 11;
+
                         break;       
-                    case 11:
+                    case 12:
                         name = "Queen";
                         value = 10;
+                        realValue = 12;
                         break;
-                    case 12:
+                    case 13:
                         name = "King";
                         value = 10;
+                        realValue = 13;
                         break;                  
                     default:
                         name = String.valueOf(j);
                         value = j;
+                        realValue = j;
                     
                 }
-                Card card = new Card(suit,name,value);
+                Card card = new Card(suit,name,value,realValue);
                 cards.add(card);
 
             }
@@ -90,10 +97,12 @@ public class Deck {
         System.out.println();
         System.out.println("Draw Card"+c1);
         System.out.println("Suit Level: " + d1.getSuitIndex(c1.getSuite()));
+        System.out.println("real Level: " + c1.getRealValue());
         System.out.println();
         Card c2 = d1.drawCard();  
         System.out.println("Draw Card"+c2);
         System.out.println("Suit Level: " + d1.getSuitIndex(c2.getSuite()));
+        System.out.println("real Level: " + c2.getRealValue());
         System.out.println();
        
         ArrayList<Card> draw = new ArrayList<Card>();

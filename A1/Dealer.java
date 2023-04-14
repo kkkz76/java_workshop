@@ -4,6 +4,7 @@ package A1;
 public class Dealer extends Player {
 
     private Deck deck;
+    
 
     public Dealer() {
         super("Dealer", "", 100,10);
@@ -33,19 +34,20 @@ public class Dealer extends Player {
     }
 
     public String singleResult(Player player, Dealer dealer){
-        
+      
         int pSuitLvl,dSuitLvl,pCardValue,dCardValue;
         if (player.getCardOnHand().size() == 1){
             pSuitLvl = deck.getSuitIndex(player.getCardOnHand().get(0).getSuite());
             dSuitLvl = deck.getSuitIndex(dealer.getCardOnHand().get(0).getSuite());
-            pCardValue = player.getCardOnHand().get(0).getValue();
-            dCardValue = dealer.getCardOnHand().get(0).getValue();
+            pCardValue = player.getCardOnHand().get(0).getRealValue();
+            dCardValue = dealer.getCardOnHand().get(0).getRealValue();
 
         }else{ //when size >1 need to retrieve the last value
+            
             pSuitLvl = deck.getSuitIndex(player.getCardOnHand().get(player.getCardOnHand().size()-1).getSuite());
-            dSuitLvl = deck.getSuitIndex(dealer.getCardOnHand().get(player.getCardOnHand().size()-1).getSuite());
-            pCardValue = player.getCardOnHand().get(player.getCardOnHand().size()-1).getValue();
-            dCardValue = dealer.getCardOnHand().get(player.getCardOnHand().size()-1).getValue();
+            dSuitLvl = deck.getSuitIndex(dealer.getCardOnHand().get(dealer.getCardOnHand().size()-1).getSuite());
+            pCardValue = player.getCardOnHand().get(player.getCardOnHand().size()-1).getRealValue();
+            dCardValue = dealer.getCardOnHand().get(dealer.getCardOnHand().size()-1).getRealValue();
         }
 
         if(pCardValue > dCardValue){
