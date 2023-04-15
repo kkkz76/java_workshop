@@ -9,8 +9,6 @@ public class Deck {
     public  Deck(){
 
         cards = new ArrayList<Card>();
-        
-
         for(int i = 0; i < suits.length ;i++){
         String suit = suits[i];
         String name;
@@ -27,7 +25,6 @@ public class Deck {
                         name = "Jack";
                         value = 10;
                         realValue = 11;
-
                         break;       
                     case 12:
                         name = "Queen";
@@ -47,8 +44,7 @@ public class Deck {
                 }
                 Card card = new Card(suit,name,value,realValue);
                 cards.add(card);
-
-            }
+             }
         }
     }
 
@@ -62,26 +58,21 @@ public class Deck {
             cards.set(indexA, cardB);
             cards.set(indexB, cardA);
         }
-
     }
-
     public void showDeck(){
         for(Card c : cards){
             System.out.println(c);
         }
     }
-
     public Card drawCard(){
         return cards.remove(0);
     }
-
     public void appendCard(ArrayList<Card> cards) {
         for (Card c : cards) {
             this.cards.add(c);
         }
     }
     public int getSuitIndex(String suit){
-
         return Arrays.asList(suits).indexOf(suit);
     }
     public ArrayList<Card> getCards(){

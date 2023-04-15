@@ -32,14 +32,9 @@ public class Card {
         public String toString(){
             return "<"+suite+" "+name+">  ";
         }
-           
-        
-    
         public static void main(String[] args) {
             Card card1 = new Card("Jack","Ace",1,1);
             System.out.println(card1);
-        
-        
-    }   
+        }   
     
 }

@@ -99,12 +99,16 @@ public class GameModule {
         showTitle();   
         String username = Keyboard.readString("Enter login name> ");
         String password = Keyboard.readString("Enter passowrd> ");
-            if(player.checkUsername(username)== true && player.checkPassword(password)){
-                    break;
-            }else{
+            if(player.checkUsername(username)== false && player.checkPassword(password) == false){
                 System.out.println("\nInvalid input");
+            }else if(player.checkUsername(username)== false){
+                System.out.println("\nInvalid Username");
+            }else if(player.checkPassword(password)== false){
+                System.out.println("Invalid Password");
+            }else{
+                break;
             }
-        }
+            }
         while(mainGame){
             showTitle();
             showChipFirstRound();

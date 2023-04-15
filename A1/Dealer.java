@@ -17,7 +17,9 @@ public class Dealer extends Player {
     public void dealCardTo(Player player){
        player.addCard(deck.drawCard()); 
     }
-
+    public Deck getDeck(){
+        return this.deck;
+    }
     public String finalResult(Player player, Dealer dealer){
         
         if(player.getTotalCardsValue() > dealer.getTotalCardsValue()){
@@ -28,11 +30,6 @@ public class Dealer extends Player {
             return "The game is tie!!!";
         }   
     }
-
-    public Deck getDeck(){
-        return this.deck;
-    }
-
     public String singleResult(Player player, Dealer dealer){
       
         int pSuitLvl,dSuitLvl,pCardValue,dCardValue;
@@ -50,7 +47,7 @@ public class Dealer extends Player {
             dCardValue = dealer.getCardOnHand().get(dealer.getCardOnHand().size()-1).getRealValue();
         }
 
-        if(pCardValue > dCardValue){
+        if(pCardValue > dCardValue){ //card values are compared with real values not values.
             return "player";
         }else if(pCardValue < dCardValue){
             return "dealer";
