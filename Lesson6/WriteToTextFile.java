@@ -7,9 +7,9 @@ public class WriteToTextFile {
         String filename = "fruit.txt";
         try {
             PrintWriter pw = new PrintWriter(filename);
-            pw.write("apple");
-            pw.write("banana");
-            pw.write("cherry");
+            pw.write("\napple");
+            pw.write("\n\nbanana");
+            pw.write("\ncherry");
             pw.close();
         } catch (Exception e) {
             // TODO: handle exception

@@ -1,1 +1,5 @@
-applebananacherry
+
+apple
+
+banana
+cherry

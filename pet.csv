@@ -1,0 +1,5 @@
+type,name,breed,weight,microchipped
+Dog,Snoppy,Beagle,50,true
+Dog,Goldy,Golden Retriever,76,true
+Cat,KyoukKyaw,Persian,12,false
+Cat,ThayThay,Singaporean,50,false
