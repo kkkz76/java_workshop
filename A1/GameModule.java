@@ -50,7 +50,7 @@ public class GameModule {
         player.setBetAmount(0);
         dealer.setBetAmount(10);
         // dealer.getDeck().showDeck();
-        System.out.println(dealer.getDeck().getCards().size()) ;  
+        // System.out.println(dealer.getDeck().getCards().size()) ;  
         
     }
     public void gamePlay(){
@@ -106,6 +106,7 @@ public class GameModule {
             }else if(player.checkPassword(password)== false){
                 System.out.println("Invalid Password");
             }else{
+                System.out.println("login Successful\n");
                 break;
             }
             }

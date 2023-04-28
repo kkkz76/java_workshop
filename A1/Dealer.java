@@ -23,7 +23,8 @@ public class Dealer extends Player {
     public String finalResult(Player player, Dealer dealer){
         
         if(player.getTotalCardsValue() > dealer.getTotalCardsValue()){
-           return player.getUsername()+" Win";
+            player.winChips(player.getTotalBetAmount());
+           return player.getUsername()+" Win \n"+ "Player got "+player.getChips()+" chips";
         }else if(player.getTotalCardsValue() < dealer.getTotalCardsValue()){
            return player.getUsername()+" Lose , Dealer wins the game";
         }else{
