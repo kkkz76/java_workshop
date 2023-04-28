@@ -9,8 +9,17 @@ public class Student_Research extends Student{
     
     public String getFinalGrade(){
     	//TODO: return the student final grade
-    	String finalGrade = unit.getFinalGrade();
-    	return finalGrade;
+    	String finalGrade = "";
+    try {
+        if (unit != null) {
+            finalGrade = unit.getFinalGrade();
+        } else {
+            throw new NullPointerException();
+        }
+    } catch (NullPointerException e) {
+        finalGrade = "Research incomplete";
+    }
+    return finalGrade;
     }
 
     public void setUnit(Unit unit) {
@@ -19,6 +28,6 @@ public class Student_Research extends Student{
   
     
     public String getCSVString() {
-    	return this.getId()+","+this.getFinalGrade()+"\n";
+    	return this.getId()+","+this.getFinalGrade();
     }
 }

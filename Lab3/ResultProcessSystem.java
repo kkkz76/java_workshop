@@ -100,8 +100,6 @@ public class ResultProcessSystem {
 				Unit unit = units.get(i);
 				if(std.getId().equals(unit.getStudentID())){
 					std.setUnit(unit);
-					System.out.println(unit.getCSVString());
-					System.out.println(unit.getFinalGrade());
 					units.remove(unit);
 				}
 			}
@@ -110,15 +108,24 @@ public class ResultProcessSystem {
 	}
 	
 	private static void sortStudentsArrayListByStudentID() {
-		//TODO: sort the ArrayList students by Student ID
+		// TODO: sort the ArrayList students by Student ID
+		boolean swap = true;
+		while (swap) {
+		  swap = false;
 	
-		//  Collections.sort(students);
-	 
-		//  for(Student str: students){
-		//  System.out.println(str);
-		//  }
-		
-	}
+		  for (int i = 1; i < students.size(); i++) {
+			Student id1 = students.get(i - 1);
+			Student id2 = students.get(i);
+	
+			if (id1.studentIDMoreThan(id2)) { // reuse the method from student class
+			  students.set(i - 1, id2);
+			  students.set(i, id1);
+			  swap = true;
+	
+			}
+		  }
+		}
+	  }
 	
 	private static void printStudentArrayListToResultReleaseCSV() {
 		
@@ -127,15 +134,8 @@ public class ResultProcessSystem {
 			
 			//TODO: print result_release.csv
 			for(Student str: students){
-			
-				
-					pw.write(str.getCSVString());
-					
-				}
-				
-		
-			
-
+				pw.write(str.getCSVString()+"\n");
+			}
 			pw.close();
 		
 		}catch(FileNotFoundException ex) {
@@ -147,6 +147,10 @@ public class ResultProcessSystem {
 		try {
 			PrintWriter pw = new PrintWriter(UNMATCH_UNITS_RESULT_FILENAME);
 			//TODO: print unmatch_units_result.csv
+			for(Unit unmatch:units){
+				pw.write(unmatch.getCSVString()+"\n");
+				
+			}
 		
 			pw.close();
 		

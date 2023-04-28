@@ -6,7 +6,7 @@ public class Helper {
 		if(score >= 85){
             grade= "HD";
         }else if(score >= 75){
-            grade= "H";
+            grade= "D";
         }else if(score >= 65){
             grade= "C";
         }else if(score >= 50){

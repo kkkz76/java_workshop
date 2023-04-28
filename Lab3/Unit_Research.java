@@ -17,7 +17,7 @@ public class Unit_Research extends Unit{
     }
     
     public String getFinalGrade(){
-    	return Helper.computeCWGrade(getOverallMarks());
+    	return Helper.computeRGrade(getOverallMarks());
     }
     
     public String getCSVString() {
