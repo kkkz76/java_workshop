@@ -1,5 +1,7 @@
 package A2;
 import java.io.Serializable;
+
+import javax.sound.sampled.SourceDataLine;
 abstract class User implements Serializable{
     private String username;
     private String hashPassword;
@@ -30,10 +32,16 @@ abstract class User implements Serializable{
             return false;
         }
     }
-    public void display(){
-        System.out.println(getUsername());
-        System.out.println(getHashPassword());
+    public String getLoginUser(String username,Admin admin,Player player){
+        if(username.equals(admin.getUsername())){
+            return "admin";
+        }else if(username.equals(player.getUsername())){
+            return "player";
+        }else{
+            return "error";
+        }
     }
+    
 
     
     

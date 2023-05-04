@@ -3,9 +3,11 @@ package A2;
 public class GameModule {
     private Player player;
     private Dealer dealer;
+    private Admin admin;
     boolean mainGame = true;
     
     public GameModule(){
+        admin = new Admin("Admin","password");
         dealer = new Dealer();
         player = new Player("IcePeak","password",100,0);
     }
@@ -91,27 +93,8 @@ public class GameModule {
         resetData();
         
     }
-    
-    public void run(){
-        // game start here
-        boolean gameStart = true;
-        while(gameStart){
-        showTitle();   
-        String username = Keyboard.readString("Enter login name> ");
-        String password = Keyboard.readString("Enter passowrd> ");
-            if(player.checkUsername(username)== false && player.checkPassword(password) == false){
-                System.out.println("\nInvalid input");
-            }else if(player.checkUsername(username)== false){
-                System.out.println("\nInvalid Username");
-            }else if(player.checkPassword(password)== false){
-                System.out.println("Invalid Password");
-            }else{
-                System.out.println("login Successful\n");
-                
-                
-                break;
-            }
-            }
+
+    public void game(){
         while(mainGame){
             showTitle();
             showChipFirstRound();
@@ -122,6 +105,37 @@ public class GameModule {
             nextGame();
         }
     }
+    
+    
+    public void run(){
+        // game start here
+        boolean gameStart = true;
+        String user = "admin";
+        while(gameStart){
+        showTitle();   
+        String username = Keyboard.readString("Enter login name> ");
+        String password = Keyboard.readString("Enter passowrd> ");
+
+            if(admin.checkUsername(username)== true && admin.checkPassword(password) == true){
+                user = "admin";
+                System.out.println("Admin Login Success");
+                gameStart = false;
+                break;
+            }else if(player.checkUsername(username)== true && player.checkPassword(password)){
+                user = "player";
+                System.out.println("Player Login Success");
+                gameStart = false;
+                break;
+            }else{
+                System.out.println("\nInvalid Login Data");
+            }
+        }
+            if(user.equals("admin")){
+                admin.menu();
+            }else{
+                game();
+            }
+ }
 
     public static void main(String[] args) {
         GameModule app = new GameModule();
