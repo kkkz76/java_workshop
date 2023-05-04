@@ -41,6 +41,9 @@ abstract class User implements Serializable{
             return "error";
         }
     }
+    public void setPassword(String password){
+        this.hashPassword = Utility.getHash(password);
+    }
     
 
     

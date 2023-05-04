@@ -6,13 +6,19 @@ public class GameModule {
     private Player player;
     private Dealer dealer;
     private Admin admin;
+    private ArrayList<Player> players;
     
     boolean mainGame = true;
     
     public GameModule(){
         admin = new Admin("Admin","password");
         dealer = new Dealer();
-        player = new Player("IcePeak","password",100,0);
+        players = admin.getPlayerArray();
+        for(Player p : players){
+            player = new Player(p.getUsername(), p.getHashPassword(),p.getChips(),p.getBetAmount());
+        }
+
+      
        
     }
     public void showTitle(){
@@ -120,15 +126,19 @@ public class GameModule {
         String username = Keyboard.readString("Enter login name> ");
         String password = Keyboard.readString("Enter passowrd> ");
 
+            for(Player player : players){                    //check
+                if(player.checkUsername(username)== true && player.checkPassword(password)){
+                    user = "player";
+                    System.out.println("Player Login Success");
+                    this.player = player;
+                   
+                    break;
+            }
+            }
             if(admin.checkUsername(username)== true && admin.checkPassword(password) == true){
                 user = "admin";
                 System.out.println("Admin Login Success");
-                gameStart = false;
-                break;
-            }else if(player.checkUsername(username)== true && player.checkPassword(password)){
-                user = "player";
-                System.out.println("Player Login Success");
-                gameStart = false;
+              
                 break;
             }else{
                 System.out.println("\nInvalid Login Data");
@@ -136,10 +146,12 @@ public class GameModule {
         }
             if(user.equals("admin")){
                 admin.menu();
+                run();
             }else{
                 game();
             }
- }
+ 
+}
 
     public static void main(String[] args) {
         GameModule app = new GameModule();

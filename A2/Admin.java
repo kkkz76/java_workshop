@@ -6,14 +6,18 @@ import java.io.*;
 public class Admin extends User {
     private ArrayList<Player>players;
     private final String PLAYERS_FILENAME ="players.bin";
+    
 
     public Admin(String username,String password){
         super(username, password);
         players = new ArrayList<Player>();
+       
         loadPlayers();
     }
 
-   
+   public ArrayList<Player> getPlayerArray(){
+    return this.players;
+   }
     public void loadPlayers(){
         try {
             FileInputStream file = new FileInputStream(PLAYERS_FILENAME);
@@ -76,6 +80,7 @@ public class Admin extends User {
         saveToPlayerBin();
         System.out.println("Player created successfully\nUserName : "+player.getUsername()+"\nPassword : "+player.getHashPassword());
     }
+
     private void deletePlayer(){
         displayPlayer();
         String deleteName = Keyboard.readString("Enter Player name to delete:");
@@ -91,6 +96,36 @@ public class Admin extends User {
             }
         }
     }
+
+    private void resetPassword(){
+        String name = Keyboard.readString("Enter Player name to reset password:");
+        for(int i =0; i < players.size(); i++){
+            Player player = players.get(i);
+            if(player.getUsername().equals(name)){
+                String password = Keyboard.readString("Enter a new Password:");
+                player.setPassword(password);
+                System.out.println("Password is updated successfully");
+                saveToPlayerBin();
+                break;
+            }else if(i == players.size()-1){
+                System.out.println("No Player found");
+            }
+        }
+    }
+    private void resetAdminPassword(){
+        String name = Keyboard.readString("Enter Admin name to reset password:");
+        if(this.getUsername().equals(name)){
+            String password = Keyboard.readString("Enter a new Password:");
+            this.setPassword(password);
+            System.out.println("Password is updated successfully");
+            
+        }else{
+            System.out.println("No User found");
+        }
+    }
+
+
+
     private void saveToPlayerBin(){
         try {
             FileOutputStream file = new FileOutputStream(PLAYERS_FILENAME);
@@ -130,6 +165,13 @@ public class Admin extends User {
                     break;
                 case 4:
                     updateChips();
+                case 5:
+                    resetPassword();
+                case 6:
+                    resetAdminPassword();
+                case 7:
+                    menu = false;
+                    break;
             }
         }
        
