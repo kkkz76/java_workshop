@@ -2,6 +2,7 @@ package A2;
 import java.util.*;
 import java.io.*;
 
+
 public class Admin extends User {
     private ArrayList<Player>players;
     private final String PLAYERS_FILENAME ="players.bin";
@@ -11,6 +12,8 @@ public class Admin extends User {
         players = new ArrayList<Player>();
         loadPlayers();
     }
+
+   
     public void loadPlayers(){
         try {
             FileInputStream file = new FileInputStream(PLAYERS_FILENAME);
@@ -48,10 +51,24 @@ public class Admin extends User {
         }
     }
     private void updateChips(){
-        for(Player player : players){
-            player.addChips(100);
+        displayPlayer();
+        String updateName = Keyboard.readString("\nEnter Name to add Chips:");
+        for(int i = 0; i < players.size(); i++) {
+            Player player = players.get(i);
+            if(player.getUsername().equals(updateName)){
+                int newChips = Keyboard.readInt("Enter Chips Amount:");
+                player.addChips(newChips);
+                System.out.println(newChips +" chips have been added to "+player.getUsername());
+                System.out.println(player.getUsername()+" now has "+player.getChips()+" chips");
+                saveToPlayerBin();
+            }else if(i == players.size() - 1){
+                System.out.println("No user found");
+            }
         }
-    }
+        }
+    
+          
+    
     private void createNewPlayer(){
         int playernum = players.size()+1;
         Player player = new Player("player"+playernum, "password"+playernum, 100, 0);
@@ -62,12 +79,14 @@ public class Admin extends User {
     private void deletePlayer(){
         displayPlayer();
         String deleteName = Keyboard.readString("Enter Player name to delete:");
-        for(Player player:players){
-            if(player.getUsername().equals(deleteName)){
-                System.out.println("Player : "+player.getUsername()+" is deleted successfully");
-                players.remove(player);
+        for(int i =0; i < players.size(); i++){
+            Player delPlayer = players.get(i);
+            if(delPlayer.getUsername().equals(deleteName)){
+                System.out.println("Player : "+delPlayer.getUsername()+" is deleted successfully");
+                players.remove(delPlayer);
                 saveToPlayerBin();
-            }else{
+                break;
+            }else if(i == players.size()-1){
                 System.out.println("No Player found");
             }
         }
@@ -109,6 +128,8 @@ public class Admin extends User {
                 case 3:
                     displayPlayer();
                     break;
+                case 4:
+                    updateChips();
             }
         }
        

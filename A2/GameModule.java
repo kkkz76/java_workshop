@@ -1,15 +1,19 @@
 package A2;
 
+import java.util.ArrayList;
+
 public class GameModule {
     private Player player;
     private Dealer dealer;
     private Admin admin;
+    
     boolean mainGame = true;
     
     public GameModule(){
         admin = new Admin("Admin","password");
         dealer = new Dealer();
         player = new Player("IcePeak","password",100,0);
+       
     }
     public void showTitle(){
         System.out.println("HighSum Game");
