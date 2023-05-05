@@ -2,7 +2,7 @@ package A2;
 
 import java.util.*;
 
-public class Player extends User {
+public class Player extends User{
     private int chips;
     protected ArrayList<Card> cardOnHand;
     private int betAmount;

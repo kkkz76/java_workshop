@@ -139,7 +139,7 @@ public class Keyboard {
         return date;
     }
 
-    private static String quit = "0";
+    // private static String quit = "0";
 
     public static int getUserOption(String title, String[] menu) {
         displayMenu(title, menu);
@@ -150,14 +150,14 @@ public class Keyboard {
         return choice;
     }
 
-    private static void displayMenu(String title, String[] menu) {
+    public static void displayMenu(String title, String[] menu) {
         line(80, "=");
         System.out.println(title.toUpperCase());
         line(80, "-");
         for (int i = 0; i < menu.length; i++) {
             System.out.println("[" + (i + 1) + "] " + menu[i]);
         }
-        System.out.println("[" + quit + "] Quit");
+        // System.out.println("[" + quit + "] Quit");
         line(80, "-");
     }
 

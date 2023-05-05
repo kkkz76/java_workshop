@@ -6,13 +6,14 @@ import java.io.*;
 public class Admin extends User {
     private ArrayList<Player>players;
     private final String PLAYERS_FILENAME ="players.bin";
+    private final String ADMIN_FILENAME = "admin.txt";
     
 
     public Admin(String username,String password){
         super(username, password);
         players = new ArrayList<Player>();
-       
         loadPlayers();
+        loadAdmin();
     }
 
    public ArrayList<Player> getPlayerArray(){
@@ -36,23 +37,27 @@ public class Admin extends User {
             }
             output.close();
         } catch (ClassNotFoundException e) {
-            // TODO: handle exception
+            System.out.println(e.getMessage());
         }catch(FileNotFoundException e){
-
+            System.out.println(e.getMessage());
         }catch(IOException e){
-
+            System.out.println(e.getMessage());
         }
-        
         System.out.println("Players Information loaded");
     }
 
-    private  void displayPlayer(){
-        for(Player player:players){
-           System.out.println();
-           System.out.println("Username : "+player.getUsername());
-           System.out.println("Password : "+player.getHashPassword());
-           System.out.println("Chips    : "+player.getChips());
+    public void displayPlayer(){
+        if(players.isEmpty()){
+            System.out.println("\nThere is no player to display\n");
+        }else{
+            for(Player player:players){
+                System.out.println();
+                System.out.println("Username : "+player.getUsername());
+                System.out.println("Password : "+player.getHashPassword());
+                System.out.println("Chips    : "+player.getChips());
+             }
         }
+        
     }
     private void updateChips(){
         displayPlayer();
@@ -71,14 +76,34 @@ public class Admin extends User {
         }
         }
     
-          
-    
     private void createNewPlayer(){
-        int playernum = players.size()+1;
-        Player player = new Player("player"+playernum, "password"+playernum, 100, 0);
-        players.add(player);
-        saveToPlayerBin();
-        System.out.println("Player created successfully\nUserName : "+player.getUsername()+"\nPassword : "+player.getHashPassword());
+        boolean check = true;
+        String name = "";
+        while(check){
+            name = Keyboard.readString("Enter Name:");
+            if(players.isEmpty()){
+                check = false;
+                break;
+            }else{
+                for(int i = 0; i < players.size(); i++) {
+                    Player player = players.get(i);
+                    if(player.getUsername().equals(name)){
+                        System.out.println("Username already exists");
+                        break;
+                    }else if(i == players.size() - 1){
+                        check = false;
+                        break;
+                    }
+                }
+            }
+            
+        }
+            String password = Keyboard.readString("Enter Password:");
+            Player player = new Player(name, password, 100, 0);
+            players.add(player);
+            saveToPlayerBin();
+            System.out.println("Player created successfully\n\nUsername : " + player.getUsername()+"\nPassword :"+player.getHashPassword());
+        
     }
 
     private void deletePlayer(){
@@ -118,6 +143,7 @@ public class Admin extends User {
             String password = Keyboard.readString("Enter a new Password:");
             this.setPassword(password);
             System.out.println("Password is updated successfully");
+            saveToAdminText();
             
         }else{
             System.out.println("No User found");
@@ -126,7 +152,7 @@ public class Admin extends User {
 
 
 
-    private void saveToPlayerBin(){
+    public void saveToPlayerBin(){
         try {
             FileOutputStream file = new FileOutputStream(PLAYERS_FILENAME);
             ObjectOutputStream opStream = new ObjectOutputStream(file);
@@ -134,9 +160,41 @@ public class Admin extends User {
                 opStream.writeObject(player);
             }
             opStream.close();
+            System.out.println("\nInformation saved successfully");
         } catch (IOException e) {
+            System.out.println("Error Encountered");
+            System.out.println("An IO exception occurred: " + e.getMessage());
+           
+        }
+    }
+
+    public void saveToAdminText(){
+        try {
+            PrintWriter pw = new PrintWriter(ADMIN_FILENAME);
+            pw.write(this.getHashPassword());
+            pw.close();
+          
+        } catch (Exception e) {
             // TODO: handle exception
         }
+    }
+
+    public void loadAdmin(){
+        try {
+            File file = new File(ADMIN_FILENAME);
+            Scanner reader = new Scanner(file);
+          
+            while (reader.hasNextLine()) {
+                String line = reader.nextLine();
+                this.setAdminPassword(line);
+            }
+            reader.close();
+        } catch (Exception e) {
+            System.out.println("No admin data created/use dafault password");
+            // TODO: handle exception
+          
+        }
+        System.out.println("Admin password is loaded\n");
     }
   
     public void run(){
@@ -144,14 +202,16 @@ public class Admin extends User {
        createNewPlayer();
         saveToPlayerBin();
         displayPlayer();
+ 
     
     }
 
     public void menu(){
-        boolean menu = true;
-        while(menu){
-            System.out.println("\nAdmin Mangement Control Panel\nEnter 1 to Create a new player\nEnter 2 to Delete a player\nEnter 3 to View all players\nEnter 4 to Issue more chips to a player\nEnter 5 to reset player's password\nEnter 6 to Change Administrator's password\nEnter 7 to Logout\n");
-            int option = Keyboard.readInt("Choose option:");
+        boolean menuloop = true;
+        String title = "Admin Panel";
+        String [] menu = {"Create Player","Delete Player","View All Players","Issue more chips to a player","Reset player's password","Reset Administrator's password","Log Out"};
+        while(menuloop){
+            int option = Keyboard.getUserOption(title, menu);
             
             switch(option){
                 case 1:
@@ -165,19 +225,19 @@ public class Admin extends User {
                     break;
                 case 4:
                     updateChips();
+                    break;
                 case 5:
                     resetPassword();
+                    break;
                 case 6:
                     resetAdminPassword();
-                case 7:
-                    menu = false;
                     break;
+                case 7:
+                    return;
             }
         }
-       
         
-    }
-
+        }
 
     public static void main(String[] args) {
         Admin admin = new Admin("admin","admin");

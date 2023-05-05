@@ -8,18 +8,12 @@ public class GameModule {
     private Admin admin;
     private ArrayList<Player> players;
     
-    boolean mainGame = true;
+    boolean mainGame = true;                            
     
     public GameModule(){
         admin = new Admin("Admin","password");
         dealer = new Dealer();
         players = admin.getPlayerArray();
-        for(Player p : players){
-            player = new Player(p.getUsername(), p.getHashPassword(),p.getChips(),p.getBetAmount());
-        }
-
-      
-       
     }
     public void showTitle(){
         System.out.println("HighSum Game");
@@ -42,17 +36,20 @@ public class GameModule {
     }
     public boolean nextGame(){
         boolean result = Keyboard.readBoolean("\nNext Game ? [Y/N]");
+        resetData();
+        admin.saveToPlayerBin();
         if(result == true){
-            resetData();
+            System.out.println("\nGame Reset\n");
         }else{
             System.out.println("\nGame Ended");
-            System.exit(0);
+            result = false;
+            
         }
         return mainGame = result;
     }
     public void resetData(){
         // System.out.println(dealer.getDeck().getCards().size()) ; 
-        player.setChips(100);
+        // player.setChips(100);
         dealer.setChips(100);
         dealer.getDeck().appendCard(player.cardOnHand);  
         dealer.getDeck().appendCard(dealer.cardOnHand);
@@ -101,7 +98,6 @@ public class GameModule {
         System.out.println();
         System.out.println(dealer.finalResult(player, dealer));
         resetData();
-        
     }
 
     public void game(){
@@ -121,29 +117,36 @@ public class GameModule {
         // game start here
         boolean gameStart = true;
         String user = "admin";
-        while(gameStart){
+        while(gameStart){   
         showTitle();   
         String username = Keyboard.readString("Enter login name> ");
         String password = Keyboard.readString("Enter passowrd> ");
-
-            for(Player player : players){                    //check
-                if(player.checkUsername(username)== true && player.checkPassword(password)){
-                    user = "player";
-                    System.out.println("Player Login Success");
-                    this.player = player;
-                   
-                    break;
-            }
-            }
-            if(admin.checkUsername(username)== true && admin.checkPassword(password) == true){
-                user = "admin";
-                System.out.println("Admin Login Success");
-              
-                break;
+        if(admin.checkUsername(username)== true && admin.checkPassword(password) == true){
+            user = "admin";
+            System.out.println("Admin Login Success");
+            gameStart = false;
+            break;
+        }else{
+            if(players.isEmpty()){
+                System.out.println("\nThere is no players in the database");
             }else{
-                System.out.println("\nInvalid Login Data");
+                for(int i = 0; i < players.size(); i++) { 
+                    Player player = players.get(i);               
+                    if(player.checkUsername(username)== true && player.checkPassword(password)){
+                        user = "player";
+                        System.out.println("Player Login Success");
+                        this.player = player;
+                        gameStart = false;
+                        break;
+                    
+                    }else if(i == players.size() - 1){
+                        System.out.println("\nInvalid Login Data");
+                        break;
+                }
             }
         }
+    }
+}
             if(user.equals("admin")){
                 admin.menu();
                 run();
@@ -156,6 +159,8 @@ public class GameModule {
     public static void main(String[] args) {
         GameModule app = new GameModule();
         app.run();
+        
+        
         
     }
 }

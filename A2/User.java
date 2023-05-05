@@ -1,7 +1,6 @@
 package A2;
 import java.io.Serializable;
 
-import javax.sound.sampled.SourceDataLine;
 abstract class User implements Serializable{
     private String username;
     private String hashPassword;
@@ -43,6 +42,10 @@ abstract class User implements Serializable{
     }
     public void setPassword(String password){
         this.hashPassword = Utility.getHash(password);
+    }
+    
+    public void setAdminPassword(String password){
+        this.hashPassword = password;
     }
     
 
