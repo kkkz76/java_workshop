@@ -6,7 +6,7 @@ public class Player extends User{
     private int chips;
     protected ArrayList<Card> cardOnHand;
     private int betAmount;
-    private int totalAmount;
+    private  int totalAmount;
 
     public Player(String username, String password, int chips ,int betAmount) {
         super(username, password);

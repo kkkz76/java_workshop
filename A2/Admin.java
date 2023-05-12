@@ -39,7 +39,7 @@ public class Admin extends User {
         } catch (ClassNotFoundException e) {
             System.out.println(e.getMessage());
         }catch(FileNotFoundException e){
-            System.out.println(e.getMessage());
+            System.out.println("Player file is not created");
         }catch(IOException e){
             System.out.println(e.getMessage());
         }
@@ -65,7 +65,16 @@ public class Admin extends User {
         for(int i = 0; i < players.size(); i++) {
             Player player = players.get(i);
             if(player.getUsername().equals(updateName)){
-                int newChips = Keyboard.readInt("Enter Chips Amount:");
+                int newChips=0;
+                boolean chipsAllow = true;
+                while(chipsAllow){
+                    newChips = Keyboard.readInt("Enter Chips Amount:");
+                    if(newChips<0){
+                        System.out.println("\nInvalid Chips amount\n");
+                    }else{
+                        chipsAllow = false;
+                    }
+                }
                 player.addChips(newChips);
                 System.out.println(newChips +" chips have been added to "+player.getUsername());
                 System.out.println(player.getUsername()+" now has "+player.getChips()+" chips");

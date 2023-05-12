@@ -31,15 +31,6 @@ abstract class User implements Serializable{
             return false;
         }
     }
-    public String getLoginUser(String username,Admin admin,Player player){
-        if(username.equals(admin.getUsername())){
-            return "admin";
-        }else if(username.equals(player.getUsername())){
-            return "player";
-        }else{
-            return "error";
-        }
-    }
     public void setPassword(String password){
         this.hashPassword = Utility.getHash(password);
     }

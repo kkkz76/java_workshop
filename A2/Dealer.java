@@ -28,7 +28,8 @@ public class Dealer extends Player {
         }else if(player.getTotalCardsValue() < dealer.getTotalCardsValue()){
            return player.getUsername()+" Lose , Dealer wins the game\n"+player.getUsername()+" left "+player.getChips()+" chips";
         }else{
-            return "The game is tie!!!";
+            player.winChips(player.getTotalBetAmount()/2);  
+            return "The game is tie!!!\n"+player.getUsername()+" left "+player.getChips()+" chips";
         }   
     }
     public String singleResult(Player player, Dealer dealer){

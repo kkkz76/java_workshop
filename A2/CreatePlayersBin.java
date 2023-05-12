@@ -5,9 +5,6 @@ public class CreatePlayersBin {
         // Player player1 = new Player("IcePeak","password",100,0);
         // Player player2 = new Player("player2","password2",100,0);
         // Player player3 = new Player("player3","password3",100,0);
-
-        
-
         try {
             FileOutputStream file = new FileOutputStream("players.bin");
             ObjectOutputStream opStream = new ObjectOutputStream(file);

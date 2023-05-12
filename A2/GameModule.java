@@ -120,7 +120,7 @@ public class GameModule {
         while(gameStart){   
         showTitle();   
         String username = Keyboard.readString("Enter login name> ");
-        String password = Keyboard.readString("Enter passowrd> ");
+        String password = Keyboard.readString("Enter password  > ");
         if(admin.checkUsername(username)== true && admin.checkPassword(password) == true){
             user = "admin";
             System.out.println("Admin Login Success");
